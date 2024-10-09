@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
+import TanStackProvider from '@/components/providers/TanStackProvider'
 import { Navbar } from '@/components/Navbar'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,8 +25,10 @@ export default function RootLayout({
 					defaultTheme='system'
 					enableSystem
 					disableTransitionOnChange>
-					<Navbar />
-					{children}
+					<TanStackProvider>
+						<Navbar />
+						{children}
+					</TanStackProvider>
 				</ThemeProvider>
 			</body>
 		</html>
