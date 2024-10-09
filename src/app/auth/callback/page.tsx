@@ -1,6 +1,21 @@
+'use client'
+
+//import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import { checkAuthStatus } from './actions'
 import { Loader } from 'lucide-react'
 
 const Page = () => {
+	const router = useRouter()
+	//const { user } = useKindeBrowserClient();
+	const { data } = useQuery({
+		queryKey: ['checkAuthStatus'],
+		queryFn: async () => await checkAuthStatus(),
+	})
+
+	if (data?.success) router.push('/')
+
 	return (
 		<div className='mt-20 w-full flex justify-center'>
 			<div className='flex flex-col items-center gap-2'>
